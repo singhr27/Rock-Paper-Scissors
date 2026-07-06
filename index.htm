@@ -1,12 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="script.js"></script>
-    <meta charset="UTF-8">
-    <title>My First Webpage</title>
-  </head>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Event Demo</title>
+  <style>
+    #parent {
+      width: 200px;
+      height: 200px;
+      background: lightblue;
+      padding: 20px;
+    }
+    #child {
+      width: 100px;
+      height: 100px;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <div id="parent">
+    Parent
+    <div id="child">Child</div>
+  </div>
 
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+  <script>
+    const parent = document.getElementById('parent');
+    const child = document.getElementById('child');
+
+    // // Bubbling events
+    // parent.addEventListener('mouseover', () => {
+    //   console.log('➡️ Mouse entered PARENT (mouseover bubbles, so this also fires when entering CHILD)');
+    // });
+    // parent.addEventListener('mouseout', () => {
+    //   console.log('⬅️ Mouse left PARENT (mouseout bubbles, so this also fires when leaving CHILD)');
+    // });
+
+    // Non-bubbling events
+    parent.addEventListener('mouseenter', () => {
+      console.log('🚪 Mouse entered PARENT (mouseenter does NOT bubble, so only fires when entering parent itself)');
+    });
+    parent.addEventListener('mouseleave', () => {
+      console.log('🚪 Mouse left PARENT (mouseleave does NOT bubble, so only fires when leaving parent itself)');
+    });
+
+    // Child events
+    // child.addEventListener('mouseover', () => {
+    //   console.log('➡️ Mouse entered CHILD (mouseover fires here AND bubbles up to parent)');
+    // });
+    child.addEventListener('mouseenter', () => {
+      console.log('🚪 Mouse entered CHILD (mouseenter fires ONLY here, does not bubble)');
+    });
+  </script>
+</body>
 </html>
