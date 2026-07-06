@@ -3,42 +3,63 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple DOM example</title>
+    <title>Shopping list example</title>
     <style>
-        .highlight {
-            color: white;
-            background-color: black;
-            padding: 10px;
-            width: 250px;
-            text-align: center;
-  }
-</style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
   </head>
   <body>
-      <section>
-        <img src="dinosaur.png" alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
-        <p>Here we will add a link to the <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
-      </section>
-      <script>
-        const link= document.querySelector("a");
-        const sect = document.querySelector("section");
-        const para = document.createElement("p")
-        const text= document.createTextNode(
-            " - The premier source for web development knowledge.",
-        );
 
+    <h1>My shopping list</h1>
 
-        para.textContent = "We hope you enjoyed the ride.";
-        sect.appendChild(para);
-        const linkPara = document.querySelector("p");
-        linkPara.appendChild(text);
-        
-        para.classList.add("highlight");
+    <form>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </form>
 
-       
+    <ul>
 
-        link.textContent= "Mozilla Developer Network";
-        link.href="https://developer.mozilla.org"
-      </script>
+    </ul>
+
+    <script>
+        const ul = document.querySelector("ul");
+        const input = document.querySelector("input");
+        const addBtn= document.querySelector("button");
+
+        addBtn.addEventListener("click", handleAddBtn);
+
+        function handleAddBtn(event){
+            event.preventDefault();   
+            let inputItem = input.value;
+            input.value = "";
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            const delBtn = document.createElement("button");
+
+            li.appendChild(span);
+            li.appendChild(delBtn);
+
+            span.textContent = inputItem;
+            delBtn.textContent = "Delete";
+
+            ul.appendChild(li);
+
+            delBtn.addEventListener("click", ()=>{
+                li.remove();
+            });
+
+            input.focus();
+        }
+
+    </script>
   </body>
-</html
+</html>
